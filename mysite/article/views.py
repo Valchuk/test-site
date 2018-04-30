@@ -16,7 +16,7 @@ def contact(request):
     return render(request, 'article/basic.html', {'values':['Справка', '+380961122333']} )
 
 def archive(request, page_number=1):
-    all_articles = Article.objects.all()
+    all_articles = Article.objects.all().order_by('-article_date')
     current_page = Paginator(all_articles, 2)
     return render_to_response('news/posts.html', {'object_list':current_page.page(page_number), 'username':auth.get_user(request).username})
 
