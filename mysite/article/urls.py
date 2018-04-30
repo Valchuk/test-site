@@ -1,7 +1,8 @@
 from django.urls import path, re_path
 from django.views.generic import ListView
 from article.models import Article
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 from . import views
 
@@ -14,4 +15,4 @@ urlpatterns = [
     path('archive/addlike/<int:article_id>/', views.addlike, name='addlike'),
     path('home/addcomment/<int:article_id>/', views.addcomment, name='addcomment'),
     re_path(r'page=(\d+)', views.archive, name='archive'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

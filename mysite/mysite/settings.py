@@ -75,12 +75,27 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
+name = os.environ.get('DATABASE_NAME')
+if name == None:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'd8p1r5god88v3m',
+            'USER': 'atoljvcqygthie',
+            'PASSWORD': 'bb4ea20ebfb60de50bfa63e11847931629d3fa8a8b84cea8dd3b6a405043b147',
+            'HOST': 'ec2-23-23-142-5.compute-1.amazonaws.com',
+            'PORT': '5432',
+        }, 
+    }
+else:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'our_db.sqlite3'),
     }
 }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -118,4 +133,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'article/static/')
