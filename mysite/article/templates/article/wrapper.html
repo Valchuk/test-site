@@ -1,0 +1,32 @@
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Title Page</title>
+    {% load staticfiles %}
+    <link rel='stylesheet' href='{% static 'css/bootstrap.min.css' %}' type='text/css'>
+    {% if username%}
+        <h1><a href="/auth/logout" class="btn btn-info btn-md" style="margin: 10px; float: right">Выйти ({{ username }})</a>
+    {% else %}
+        <a href="/auth/login" class="btn btn-primary btn-md" style="margin: 10px; float: right">Войти</a></h1>
+    {% endif%}
+</head>
+<body style='background: silver'>
+    <div class="jumbotron">
+    <div class="container">
+    <h1> {% block title %}{% endblock %}</h1>
+    {% block content %}{% endblock %}
+    {% block login %}{% endblock %}
+        <a href="/home" class="btn btn-success btn-lg">Главная страница</a>
+        <a href="/archive" class="btn btn-primary btn-lg">Архив &raquo;</a>
+        <a href="/contact" class="btn btn-info btn-lg">Контакты</a>
+    </div>
+  </div>
+  <div class="container">
+    <hr>
+    &copy; Все права защищены 2018
+  </div>
+</body>
+</html>
+ 

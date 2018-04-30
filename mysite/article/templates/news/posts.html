@@ -1,0 +1,38 @@
+{% extends 'article/wrapper.html' %}    
+{% load staticfiles %}
+{% block content %}
+    {% for article in object_list %}
+    <a href='/home/{{ article.id }}'><h3>{{ article.article_title }}</h3></a>
+    <h6>Опубликовано:{{ article.article_date|date:'d-m-Y' }}</h6>
+    {% if username %}
+        <h6><a href='/archive/addlike/{{ article.id }}/'><img src='{% static 'image.png' %}' width='25px' height='25px'></a>{{ article.article_likes }}</h6>
+    {% else %}
+        <h6><img src='{% static 'image.png' %}' width='25px' height='25px'></a>{{ article.article_likes }}</h6></h6>
+    {% endif %}
+    <hr>
+    {% endfor %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="page=1">&laquo;</a>
+            <a href="page={{ object_list.previous_page_number }}">previous</a>
+        {% else %}
+            &laquo;
+        {% endif %}
+
+        <span class="current">
+        {% for page in object_list.paginator.page_range %}
+            <a href='page={{ page }}'>{{ page }}</a></li>
+        {% endfor %}
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="page={{ object_list.next_page_number }}">next</a>
+            <a href="page={{ object_list.paginator.num_pages }}">&raquo;</a>
+        {% else %}
+            &raquo;
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+ 

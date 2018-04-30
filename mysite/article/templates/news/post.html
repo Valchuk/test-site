@@ -1,0 +1,26 @@
+{% extends 'article/wrapper.html' %} 
+
+{% block content %}
+    <h2 class='text-info'>{{article.article_title}}</h2>
+    <h6 class='text-info'>Опубликовано: {{article.article_date|date:'Y-m-d в h:i:s'}}</h6>
+    <p>{{article.article_text|safe|linebreaks}}</p>
+    <hr>
+    <div class='large-offset-1 large-8 columns'>
+        <h6 class='text-info'>Комментарии:</h6>
+        {% for comment in comments %}
+            <p>{{ comment.comment_text }}</p>
+        {% endfor %}
+        {% if username %}
+            <form action='/home/addcomment/{{ article.id }}/' method='post'>
+            {% csrf_token %}
+            Текст комментария:
+            {% for form in form %}
+                <p>{{ form }}</p>
+            {% endfor %}
+        {% endif %}
+            <input type='submit' class='button' value='Добавить комментарий'>
+            </form>
+    </div>
+{% endblock %}  
+ 
+ 
